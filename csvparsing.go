@@ -25,7 +25,7 @@ type Person struct {
 	Email            string
 	Gender           string
 	DateRegistration time.Time
-	Loan             string
+	Loan             float64
 }
 
 func (g Gender) String() string {
@@ -37,6 +37,7 @@ func parsing_csv() {
 	for i := 0; i < 101; i++ {
 		line, _ := reader.Read()
 		id, _ := strconv.Atoi(line[0])
+		loan, _ := strconv.ParseFloat(line[6], 64)
 		dataPeople, _ := time.Parse("1/2/2006", line[5])
 		people = append(people, Person{
 			Id:               id,
@@ -45,26 +46,14 @@ func parsing_csv() {
 			Email:            line[3],
 			Gender:           line[4],
 			DateRegistration: dataPeople,
-			Loan:             line[6],
+			Loan:             loan,
 		})
-	}
-
-	/*for _, value := range people{
-		fmt.Println(value)
-	}*/
-	//loanrange()
-	//prozent_Man_Woman()
-	//genderPercent()
-	//sortLoan()
-	for _, value := range people {
-		t := value.DateRegistration
-		m := value.DateRegistration
-		dataPeople(t, m, people)
 	}
 
 }
 func main() {
 	parsing_csv()
+	loanrange()
 }
 
 func loanrange() {
@@ -77,8 +66,7 @@ func loanrange() {
 	}
 	fmt.Println("До проверки по диапозону")
 	for i := 0; i < len(people); i++ {
-		currLoan1, _ := strconv.ParseFloat(people[i].Loan, 64)
-		if currLoan1 >= first_range && currLoan1 <= last_range {
+		if people[i].Loan >= first_range && people[i].Loan <= last_range {
 			fmt.Println(people[i])
 		}
 	}
