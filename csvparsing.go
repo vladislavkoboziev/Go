@@ -52,8 +52,7 @@ func parsing_csv() {
 
 }
 func main() {
-	parsing_csv()
-	loanrange()
+
 }
 
 func loanrange() {
