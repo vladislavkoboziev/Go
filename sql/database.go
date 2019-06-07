@@ -4,12 +4,11 @@ import (
 	"database/sql"
 	"encoding/csv"
 	"fmt"
+	_ "github.com/lib/pq"
 	"log"
 	"os"
 	"strconv"
 	"time"
-
-	_ "github.com/lib/pq"
 )
 
 type sql_manipulation interface {
